@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Buscar Empleados</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/buscarEmpleados.css}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+<div class="container">
+    <div class="h1Container">
+        <h1>Buscar Empleados</h1>
+    </div>
+    <form th:action="@{/empresa/mostrarEmpleadosFiltrados}" method="post">
+        <div class="dosContainer">
+            <div class="formContainer">
+                <label for="nombre">Nombre:</label>
+                <input type="text" name="nombre" id="nombre" placeholder="Cualquiera">
+                <label for="dni">DNI:</label>
+                <input type="text" name="dni" id="dni" placeholder="Cualquiera">
+                <label for="sexo">Sexo:</label>
+                <select name="sexo" id="sexo">
+                    <option value="">Cualquiera</option>
+                    <option value="M">Masculino</option>
+                    <option value="F">Femenino</option>
+                </select>
+            </div>
+            <div class="formContainer">
+                <label for="categoria">Categoría:</label>
+                <input type="number" name="categoria" id="categoria" placeholder="Cualquiera">
+                <label for="anyos">Años Trabajados:</label>
+                <input type="number" name="anyos" id="anyos" placeholder="Cualquiera">
+                <div style="text-align: left;">
+                    <input type="submit" value="Buscar">
+                </div>
+            </div>
+        </div>
+        <a th:href="@{/empresa/inicio}">
+            <i class="fas fa-arrow-left"></i> Volver al Inicio
+        </a>
+    </form>
+</div>
+</body>
+</html>

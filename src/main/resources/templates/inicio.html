@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Menú de Opciones para Empresa</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/index.css}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+<div class="indexContainer">
+    <h1>Menú de Opciones para Empresa</h1>
+</div>
+<div class="indexContainerTable">
+    <table>
+        <tr>
+            <td>
+                <a th:href="@{/empresa/mostrarEmpleados}">
+                    <i class="fa-solid fa-address-card fa-2x"></i> Lista de Empleados
+                </a>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <a th:href="@{/empresa/buscarSalario}">
+                    <i class="fas fa-money-bill-wave fa-2x"></i> Mostrar Salario de un Empleado
+                </a>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <a th:href="@{/empresa/buscarEmpleados}">
+                    <i class="fas fa-search fa-2x"></i> Buscar Empleado
+                </a>
+            </td>
+        </tr>
+    </table>
+</div>
+</body>
+</html>
