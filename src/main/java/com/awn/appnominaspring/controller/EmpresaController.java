@@ -1,7 +1,7 @@
 package com.awn.appnominaspring.controller;
 
 import com.awn.appnominaspring.entity.Empleado;
-import com.awn.appnominaspring.entity.Nominas;
+//import com.awn.appnominaspring.entity.Nominas;
 import com.awn.appnominaspring.service.IEmpleadoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -35,17 +35,17 @@ public class EmpresaController {
         return "empresa/buscarSalario";
     }
 
-    @PostMapping("/mostrarSalario")
-    public String mostrarSalario(@RequestParam String dni, Model model) {
-        try {
-            Nominas nomina = empleadoService.calcularNomina(dni);
-            model.addAttribute("dni", dni);
-            model.addAttribute("salario", nomina.getSueldoCalculado());
-        } catch (IllegalArgumentException e) {
-            model.addAttribute("mensajeError", e.getMessage());
-        }
-        return "empresa/mostrarSalario";
-    }
+//    @PostMapping("/mostrarSalario")
+//    public String mostrarSalario(@RequestParam String dni, Model model) {
+//        try {
+//            Nominas nomina = empleadoService.calcularNomina(dni);
+//            model.addAttribute("dni", dni);
+//            model.addAttribute("salario", nomina.getSueldoCalculado());
+//        } catch (IllegalArgumentException e) {
+//            model.addAttribute("mensajeError", e.getMessage());
+//        }
+//        return "empresa/mostrarSalario";
+//    }
 
     @GetMapping("/buscarEmpleados")
     public String buscarEmpleados() {
@@ -60,7 +60,7 @@ public class EmpresaController {
             @RequestParam(required = false) Integer categoria,
             @RequestParam(required = false) Integer anyos,
             Model model) {
-        List<Empleado> empleados = empleadoService.obtenerTodosLosEmpleados(); // Simulación de filtrado.
+        List<Empleado> empleados = empleadoService.obtenerEmpleadosFiltrados(nombre, dni, sexo, categoria, anyos); // Simulación de filtrado.
         model.addAttribute("empleados", empleados);
         return "empresa/mostrarEmpleados";
     }
