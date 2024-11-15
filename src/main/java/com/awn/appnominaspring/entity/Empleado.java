@@ -19,7 +19,7 @@ public class Empleado {
     private String nombre;
 
     @NotNull(message = "El sexo es obligatorio")
-    private char sexo;
+    private String sexo;
 
     @Min(value = 1, message = "La categoría debe estar entre 1 y 10")
     @Max(value = 10, message = "La categoría debe estar entre 1 y 10")
@@ -29,7 +29,7 @@ public class Empleado {
     private int anyos = 0;
 
     // Constructor personalizado
-    public Empleado(String dni, String nombre, char sexo, int categoria, int anyos) {
+    public Empleado(String dni, String nombre, String sexo, int categoria, int anyos) {
         this.dni = dni;
         this.nombre = nombre;
         this.sexo = sexo;
