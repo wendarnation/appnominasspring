@@ -51,18 +51,5 @@ public class Empleado {
         System.out.println(nombre + ", " + dni + ", " + sexo + ", " + categoria + ", " + anyos);
     }
 
-    // Setters con validación adicional en caso de no usar Lombok
-    public void setCategoria(int categoria) {
-        if (categoria < 1 || categoria > 10) {
-            throw new IllegalArgumentException("La categoría debe estar entre 1 y 10");
-        }
-        this.categoria = categoria;
-    }
 
-    public void setAnyos(int anyos) {
-        if (anyos < 0) {
-            throw new IllegalArgumentException("Los años no pueden ser negativos");
-        }
-        this.anyos = anyos;
-    }
 }
