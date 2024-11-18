@@ -57,55 +57,22 @@ public class EmpresaController {
     public String mostrarEmpleadosFiltrados(
             @RequestParam(required = false) String nombre,
             @RequestParam(required = false) String dni,
-            @RequestParam(required = false) Character sexo,
+            @RequestParam(required = false) String sexo,
             @RequestParam(required = false) Integer categoria,
             @RequestParam(required = false) Integer anyos,
             Model model) {
 
-        // Filtrar empleados usando el servicio con lógica de coincidencias parciales
-        List<Empleado> empleados = empleadoService.filtrarEmpleados(
-                (root, query, criteriaBuilder) -> {
-                    var predicates = criteriaBuilder.conjunction(); // Predicados vacíos para encadenar
+        // Crear la especificación de filtrado
+        var spec = empleadoService.crearFiltro(nombre, dni, sexo, categoria, anyos);
 
-                    // Filtrar por nombre (coincidencia parcial)
-                    if (nombre != null && !nombre.isEmpty()) {
-                        predicates = criteriaBuilder.and(predicates,
-                                criteriaBuilder.like(root.get("nombre"), "%" + nombre + "%"));
-                    }
-
-                    // Filtrar por DNI (coincidencia parcial)
-                    if (dni != null && !dni.isEmpty()) {
-                        predicates = criteriaBuilder.and(predicates,
-                                criteriaBuilder.like(root.get("dni"), "%" + dni + "%"));
-                    }
-
-                    // Filtrar por sexo (coincidencia exacta)
-                    if (sexo != null) {
-                        predicates = criteriaBuilder.and(predicates,
-                                criteriaBuilder.equal(root.get("sexo"), sexo));
-                    }
-
-                    // Filtrar por categoría (coincidencia exacta)
-                    if (categoria != null) {
-                        predicates = criteriaBuilder.and(predicates,
-                                criteriaBuilder.equal(root.get("categoria"), categoria));
-                    }
-
-                    // Filtrar por años de experiencia (coincidencia exacta)
-                    if (anyos != null) {
-                        predicates = criteriaBuilder.and(predicates,
-                                criteriaBuilder.equal(root.get("anyos"), anyos));
-                    }
-
-                    return predicates;
-                });
+        // Obtener empleados filtrados
+        List<Empleado> empleados = empleadoService.filtrarEmpleados(spec);
 
         model.addAttribute("empleados", empleados);
-        return "empresa/mostrarEmpleados"; // Vista que muestra empleados filtrados
+        return "empresa/mostrarEmpleados";
     }
 
-
-    @GetMapping("/modificarEmpleado")
+    @PostMapping ("/modificarEmpleado")
     public String modificarEmpleado(@RequestParam String dni, Model model) {
         Empleado empleadoOpt = empleadoService.buscarEmpleadoPorDni(dni);
         model.addAttribute("empleado", empleadoOpt);
@@ -119,9 +86,6 @@ public class EmpresaController {
         model.addAttribute("exito", true);
         return mostrarEmpleados(model);
     }
-
-
-
 
     @GetMapping("/error")
     public String error(@RequestParam String mensaje, Model model) {

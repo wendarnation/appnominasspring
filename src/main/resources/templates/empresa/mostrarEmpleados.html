@@ -42,7 +42,7 @@
                 <td th:text="${empleado.anyos}"></td>
                 <td>
                     <!-- Formulario para modificar empleado -->
-                    <form th:action="@{/empresa/modificarEmpleado}" method="get" style="display: inline;">
+                    <form th:action="@{/empresa/modificarEmpleado}" method="post" style="display: inline;">
                         <input type="hidden" name="dni" th:value="${empleado.dni}">
                         <input type="submit" value="Modificar">
                     </form>

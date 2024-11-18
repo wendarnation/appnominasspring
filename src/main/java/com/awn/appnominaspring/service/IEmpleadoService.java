@@ -23,7 +23,8 @@ public interface IEmpleadoService {
     // Obtener el salario de un empleado por su DNI
     Optional<Integer> obtenerSalarioPorDni(String dni);
 
-    // Modificar un empleado
-    boolean modificarEmpleado(String dni, String nombre, String sexo, Integer categoria, Integer anyos);
+    void modificarEmpleado(String dni, String nombre, String sexo, Integer categoria, Integer anyos);
+
+    Specification<Empleado> crearFiltro(String nombre, String dni, String sexo, Integer categoria, Integer anyos);
 }
 
